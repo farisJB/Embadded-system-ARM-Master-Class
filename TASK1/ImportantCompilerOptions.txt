@@ -1,0 +1,41 @@
+
+arm-none-eabi-gcc Options
+
+-c			:Compile and assemble, but do not link.
+-E                      :Preprocess only; do not compile, assemble or link.                                                                                                  
+-S                      :Compile only; do not assemble or link.  
+-mcpu=cortex-m4		:Specify the name of the target CPU.
+-march=armv7e-m		:Specify the name of the target architecture. 
+-mthumb			:Generate code for Thumb state.
+-I			:include pathes
+-Wa,<options>           :Pass comma-separated <options> on to the assembler.
+-Wp,<options>           :Pass comma-separated <options> on to the preprocessor.
+-Wl,<options>           :Pass comma-separated <options> on to the linker.
+-save-temps             :Do not delete intermediate files.
+
+-specs="nosys.specs"    :which libc.a to be linked
+-nostdlib               :exclude standard libc
+-ffunction-sections     :Place each function into its own section. (section for each file)
+-fdata-sections         :Place data items into their own section.
+-g                      :Generate debug information in default format.
+-Og                     :Optimize for debugging experience rather than speed or size.
+-O0                     :NoOptimization
+-Wall                   :Enable most warning messages.
+-Wl,-Map,"Session_01.map"
+-Wl,-T"tm4c123gh6pm.lds"
+--entry <address\symbol>:Set start address
+-std=c89
+-D<Macro>               :Define Macro
+/*==================================================================*/
+arm-none-eabi-objdump Options
+--syms main.o            Display the Symbol table
+-f, --file-headers       Display the contents of the overall file header
+-d, --disassemble        Display assembler contents of executable sections
+/*==================================================================*/
+arm-none-eabi-objcopy Options
+arm-none-eabi-objcopy -O ihex  "Session_01.out"  "Session_01.hex"
+
+
+/*==================================================================*/
+nosys.specs : no use of semihosting.
+Semihosting is a mechanism that enables code running on an ARM target to communicate and use the Input/Output facilities on a host computer that is running a debugger.
